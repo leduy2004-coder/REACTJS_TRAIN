@@ -1,11 +1,6 @@
+import type { Product } from "@/Models/Product";
 import Image from "../Image";
-export type Product = {
-  id: string;
-  name: string;
-  price: number;
-  description?: string;
-  imageUrl?: string;
-};
+import DeleteConfirmDialogProps from "./DeleteConfirmDialog";
 
 type Props = {
   product: Product;
@@ -17,15 +12,19 @@ const ProductCard = ({ product, onEdit, onDelete }: Props) => {
   return (
     <article className="rounded-lg border border-gray-200 p-4">
       <Image
-        src={product.imageUrl}
+        src={product?.imgUrl?.[0]?.url}
         alt={product.name}
         className="mb-3 h-40 w-full rounded-md object-cover"
       />
       <div className="mb-2 font-semibold text-gray-800">{product.name}</div>
       {product.description && (
-        <div className="mb-2 text-sm text-gray-600 line-clamp-2">{product.description}</div>
+        <div className="mb-2 line-clamp-2 text-sm text-gray-600">
+          {product.description}
+        </div>
       )}
-      <div className="mb-3 text-gray-600">{product.price.toLocaleString()} đ</div>
+      <div className="mb-3 text-gray-600">
+        {product.price.toLocaleString()} đ
+      </div>
       <div className="flex gap-2">
         <button
           className="rounded border border-gray-300 px-3 py-1 text-sm hover:bg-gray-50"
@@ -33,16 +32,11 @@ const ProductCard = ({ product, onEdit, onDelete }: Props) => {
         >
           Sửa
         </button>
-        <button
-          className="rounded border border-red-300 px-3 py-1 text-sm text-red-600 hover:bg-red-50"
-          onClick={() => onDelete(product.id)}
-        >
-          Xóa
-        </button>
+
+        <DeleteConfirmDialogProps onConfirm={() => onDelete(product.id)} />
       </div>
     </article>
   );
 };
 
 export default ProductCard;
-

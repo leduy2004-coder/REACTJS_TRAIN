@@ -35,7 +35,6 @@ export const getAllProductByCategory = async (
   categoryId: string,
   tokenStr: string,
 ): Promise<ApiResponse<PageResponse<ProductGetResponse>>> => {
-
   const res = await callPath.get<ApiResponse<PageResponse<ProductGetResponse>>>(
     `product/get-products-by-category/${categoryId}`,
     tokenStr,
@@ -44,7 +43,7 @@ export const getAllProductByCategory = async (
   return res;
 };
 /**
- * Get all products 
+ * Get all products
  */
 
 export const getAllProduct = async (
@@ -80,6 +79,7 @@ export const createProductAPI = async (
     tokenStr,
     { headers: { "Content-Type": "multipart/form-data" } },
   );
+  console.log("res", res);
   return res.data;
 };
 
@@ -90,13 +90,10 @@ export const deleteProductAPI = async (
   productId: string,
   tokenStr: string,
 ): Promise<ApiResponse<boolean>> => {
-  const form = new URLSearchParams();
-  form.append("productId", productId);
-
-  const res = await callPath.post<ApiResponse<boolean>>(
+  const res = await callPath.deleted<ApiResponse<boolean>>(
     "product/delete",
-    form,
     tokenStr,
+    { params: { productId } },
   );
   return res.data;
 };

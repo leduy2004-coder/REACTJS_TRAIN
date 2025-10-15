@@ -1,8 +1,8 @@
 import React, { createContext, useContext, useState } from "react";
-import type { Product } from "@/Components/Product/ProductCard";
 import { getMyProductsAPI } from "@/Services/ProductService";
 import { toast } from "react-toastify";
 import { UserAuth } from "./UserContext";
+import type { Product } from "@/Models/Product";
 type ProductContextType = {
   products: Product[];
   page: number;
@@ -37,13 +37,12 @@ export const ProductProvider = ({
   const [isLoading, setIsLoading] = useState(false);
   const { token } = UserAuth();
 
-  // ✅ Không tự động gọi API ở đây nữa
   const refreshProducts = async (pageNum = 1) => {
     try {
       setIsLoading(true);
       const res = await getMyProductsAPI(pageNum, 10, token || "");
       const data = res.result;
-      setProducts(data?.data || []);
+      setProducts(data.data);
       setTotalPages(data.totalPages);
     } catch (err) {
       console.error(err);

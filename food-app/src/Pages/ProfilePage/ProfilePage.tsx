@@ -1,27 +1,43 @@
-import { useEffect, useMemo, useState } from "react";
-import ProductEditor from "@/Components/Product/ProductEditor";
+import { useEffect, useState } from "react";
 import ProductCard from "@/Components/Product/ProductCard";
 import ProfileInfo from "@/Components/Profile/ProfileInfo";
-import ProductAddModal from "@/Components/Product/ProductAddModal";
 import { UserAuth } from "@/Context/UserContext";
 import { UseProducts } from "@/Context/ProductContext";
+import ProductFormModal from "@/Components/Product/ProductFormModal";
+import type { Product } from "@/Models/Product";
+import { toast } from "react-toastify";
+import { deleteProductAPI } from "@/Services/ProductService";
 
 const ProfilePage = () => {
-  const { user } = UserAuth();
+  const { user, token } = UserAuth();
   const { products, isAddOpen, setIsAddOpen, refreshProducts, isLoading } =
     UseProducts();
+  const [formProduct, setFormProduct] = useState<Product | null>(null);
 
-  const [editingId, setEditingId] = useState<string | null>(null);
-
-  // ✅ Gọi API khi mở trang
   useEffect(() => {
     refreshProducts();
   }, []);
+  const handleEdit = (id: string) => {
+    const productToEdit = products.find((p) => p.id === id);
+    if (productToEdit) {
+      setFormProduct(productToEdit);
+    }
+  };
 
-  const editingProduct = useMemo(
-    () => products.find((p) => p.id === editingId) ?? null,
-    [products, editingId],
-  );
+  const handleDelete = async (id: string) => {
+    try {
+      const response = await deleteProductAPI(id, token || "");
+      if (response) {
+        toast.success("Xóa sản phẩm thành công!");
+        refreshProducts();
+      } else {
+        toast.error("Không thể xóa sản phẩm!");
+      }
+    } catch (error) {
+      console.error("Delete error:", error);
+      toast.error("Có lỗi xảy ra khi xóa sản phẩm!");
+    }
+  };
 
   return (
     <div className="container mx-auto px-6 py-8">
@@ -48,8 +64,8 @@ const ProfilePage = () => {
               <ProductCard
                 key={product.id}
                 product={product}
-                onEdit={setEditingId}
-                onDelete={() => {}}
+                onEdit={handleEdit}
+                onDelete={handleDelete}
               />
             ))}
           </div>
@@ -57,19 +73,25 @@ const ProfilePage = () => {
       </section>
 
       {isAddOpen && (
-        <ProductAddModal
+        <ProductFormModal
           isOpen={isAddOpen}
           onClose={() => setIsAddOpen(false)}
-          onCreated={() => refreshProducts()}
+          onSaved={() => {
+            setIsAddOpen(false);
+            refreshProducts();
+          }}
         />
       )}
 
-      {editingProduct && (
-        <ProductEditor
-          key={editingProduct.id}
-          product={editingProduct}
-          onClose={() => setEditingId(null)}
-          onSave={() => refreshProducts()}
+      {formProduct && (
+        <ProductFormModal
+          isOpen={!!formProduct}
+          onClose={() => setFormProduct(null)}
+          onSaved={() => {
+            setFormProduct(null);
+            refreshProducts();
+          }}
+          product={formProduct}
         />
       )}
     </div>

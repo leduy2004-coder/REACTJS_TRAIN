@@ -1,3 +1,11 @@
+export type Product = {
+  id: string;
+  name: string;
+  price: number;
+  description?: string;
+  imgUrl?: CloudinaryResponse[];
+  categoryId: string;
+};
 export type ProductCreateRequest = {
   name: string;
   description: string;
@@ -21,7 +29,8 @@ export type ProductGetResponse = {
   price: number;
   description: string;
   categoryName: string;
-  images: CloudinaryResponse[];
+  categoryId: string;
+  imgUrl: CloudinaryResponse[];
 };
 
 export type ProductUpdateRequest = {
@@ -40,4 +49,3 @@ export type CloudinaryResponse = {
   publicId: string;
   id: string;
 };
-

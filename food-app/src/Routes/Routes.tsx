@@ -7,7 +7,7 @@ import SearchPage from "@/Pages/SearchPage";
 import ProtectedRoute from "./ProtectedRoute";
 import LoginPage from "@/Pages/LoginPage";
 import RegisterPage from "@/Pages/RegisterPage";
-import ProductDetailPage from "@/Pages/ProductDetailPage/ProductDetailPage";
+import ProductDetailPage from "@/Pages/ProductDetailPage";
 
 export const router = createBrowserRouter([
   {
