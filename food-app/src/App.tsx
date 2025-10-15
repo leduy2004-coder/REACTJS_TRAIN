@@ -1,17 +1,20 @@
 import { Outlet } from "react-router";
-import Navbar from "@/Components/Navbar/Navbar";
 import "react-toastify/dist/ReactToastify.css";
 import { ToastContainer } from "react-toastify";
 import { UserProvider } from "@/Context/UserContext";
+import { HeaderLayout } from "./Components/Header";
+import { ProductProvider } from "./Context/ProductContext";
 
 function App() {
   return (
-      <UserProvider>
-        <Navbar />
+    <UserProvider>
+      <ProductProvider>
+        <HeaderLayout />
         <Outlet />
         <ToastContainer />
-      </UserProvider>
+      </ProductProvider>
+    </UserProvider>
   );
 }
 
-export default App
+export default App;

@@ -1,7 +1,42 @@
+import Category from "@/Components/Category";
+import { Hero } from "@/Components/Hero";
+
 const HomePage = () => {
   return (
-    <div style={{ padding: "20px" }}>
-      <div>HomePage</div>
+    <div className="min-h-screen bg-gray-50">
+      {/* Hero Banner */}
+
+      <Hero />
+
+      {/* Featured Categories */}
+      <section className="container mx-auto px-6 py-12">
+        <h2 className="mb-6 text-2xl font-bold text-gray-800">Loại</h2>
+        <Category />
+      </section>
+
+      {/* Promotions */}
+      <section className="bg-white py-12">
+        <div className="container mx-auto px-6">
+          <div className="grid grid-cols-1 gap-6 md:grid-cols-3">
+            {[1, 2, 3].map((card) => (
+              <div
+                key={card}
+                className="rounded-2xl border border-gray-200 bg-gradient-to-br from-red-50 to-orange-50 p-6 shadow-sm"
+              >
+                <h3 className="mb-2 text-lg font-bold text-gray-800">
+                  Special Offer
+                </h3>
+                <p className="mb-4 text-gray-600">
+                  Up to 30% off selected items
+                </p>
+                <button className="rounded-lg bg-red-600 px-4 py-2 text-sm font-semibold text-white shadow transition-colors hover:bg-red-700">
+                  Shop Deals
+                </button>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
     </div>
   );
 };

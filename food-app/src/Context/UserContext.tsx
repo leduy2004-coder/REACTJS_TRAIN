@@ -20,7 +20,6 @@ const UserContext = createContext<UserContextType>({} as UserContextType);
 export function UserAuth() {
   return useContext(UserContext);
 }
-
 export const UserProvider = ({ children }: Props) => {
   const navigate = useNavigate();
   const [token, setToken] = useState<string | null>(null);
