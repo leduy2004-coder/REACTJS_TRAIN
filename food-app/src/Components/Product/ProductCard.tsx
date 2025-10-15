@@ -3,6 +3,7 @@ export type Product = {
   id: string;
   name: string;
   price: number;
+  description?: string;
   imageUrl?: string;
 };
 
@@ -21,6 +22,9 @@ const ProductCard = ({ product, onEdit, onDelete }: Props) => {
         className="mb-3 h-40 w-full rounded-md object-cover"
       />
       <div className="mb-2 font-semibold text-gray-800">{product.name}</div>
+      {product.description && (
+        <div className="mb-2 text-sm text-gray-600 line-clamp-2">{product.description}</div>
+      )}
       <div className="mb-3 text-gray-600">{product.price.toLocaleString()} đ</div>
       <div className="flex gap-2">
         <button

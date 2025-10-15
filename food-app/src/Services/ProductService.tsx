@@ -8,7 +8,6 @@ import type {
   ProductUpdateImageRequest,
   CloudinaryResponse,
 } from "@/Models/Product";
-import Category from "@/Components/Category";
 
 /**
  * Get current user's products (paginated)
@@ -34,10 +33,28 @@ export const getAllProductByCategory = async (
   page = 1,
   size = 10,
   categoryId: string,
+  tokenStr: string,
 ): Promise<ApiResponse<PageResponse<ProductGetResponse>>> => {
+
   const res = await callPath.get<ApiResponse<PageResponse<ProductGetResponse>>>(
     `product/get-products-by-category/${categoryId}`,
-    "",
+    tokenStr,
+    { params: { page, size } },
+  );
+  return res;
+};
+/**
+ * Get all products 
+ */
+
+export const getAllProduct = async (
+  page = 1,
+  size = 10,
+  tokenStr: string,
+): Promise<ApiResponse<PageResponse<ProductGetResponse>>> => {
+  const res = await callPath.get<ApiResponse<PageResponse<ProductGetResponse>>>(
+    `product/get-all-products`,
+    tokenStr,
     { params: { page, size } },
   );
   return res;
@@ -120,35 +137,4 @@ export const updateImageAPI = async (
     { headers: { "Content-Type": "multipart/form-data" } },
   );
   return res.data;
-};
-
-/**
- * Search products by name, price range, and category
- */
-export const searchProductsAPI = async (
-  page = 1,
-  size = 10,
-  searchParams: {
-    name?: string;
-    minPrice?: number;
-    maxPrice?: number;
-    categoryId?: string;
-  } = {},
-): Promise<ApiResponse<PageResponse<ProductGetResponse>>> => {
-  const params = new URLSearchParams({
-    page: page.toString(),
-    size: size.toString(),
-  });
-
-  if (searchParams.name) params.append("name", searchParams.name);
-  if (searchParams.minPrice !== undefined) params.append("minPrice", searchParams.minPrice.toString());
-  if (searchParams.maxPrice !== undefined) params.append("maxPrice", searchParams.maxPrice.toString());
-  if (searchParams.categoryId) params.append("categoryId", searchParams.categoryId);
-
-  const res = await callPath.get<ApiResponse<PageResponse<ProductGetResponse>>>(
-    "product/search",
-    "",
-    { params },
-  );
-  return res;
 };

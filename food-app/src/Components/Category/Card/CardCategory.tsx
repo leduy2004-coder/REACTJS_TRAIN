@@ -6,7 +6,7 @@ const CardCategory = ({ item }: { item: CategoriesResponse }) => {
   const navigate = useNavigate();
 
   const handleDetail = () => {
-    navigate(`/products?categoryId=${item.id}`);
+    navigate(`/search?categoryId=${item.id}`);
   }
     return (
         <div
