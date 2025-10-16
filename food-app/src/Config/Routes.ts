@@ -4,6 +4,7 @@ const routes = {
   search: "/search",
   login: "/login",
   register: "/register",
+  admin_category: "/admin/category",
 };
 
 export default routes;

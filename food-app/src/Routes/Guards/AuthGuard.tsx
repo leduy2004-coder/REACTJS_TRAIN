@@ -4,7 +4,7 @@ import { UserAuth } from "@/Context/UserContext";
 import config from "@/Config";
 type Props = { children: React.ReactNode };
 
-const ProtectedRoute = ({ children }: Props) => {
+const AuthGuard = ({ children }: Props) => {
   const location = useLocation();
   const { isLoggedIn } = UserAuth();
   return isLoggedIn() ? (
@@ -14,4 +14,4 @@ const ProtectedRoute = ({ children }: Props) => {
   );
 };
 
-export default ProtectedRoute;
+export default AuthGuard;

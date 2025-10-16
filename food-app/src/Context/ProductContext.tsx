@@ -1,5 +1,5 @@
 import React, { createContext, useContext, useState } from "react";
-import { getMyProductsAPI } from "@/Services/ProductService";
+import config from "@/Services";
 import { toast } from "react-toastify";
 import { UserAuth } from "./UserContext";
 import type { Product } from "@/Models/Product";
@@ -37,7 +37,7 @@ export const ProductProvider = ({
   const refreshProducts = async (pageNum = 1) => {
     try {
       setIsLoading(true);
-      const res = await getMyProductsAPI(pageNum, 2, token || "");
+      const res = await config.getMyProductsAPI(pageNum, 2, token || "");
       const data = res.result;
       setProducts(data.data);
       setTotalPages(data.totalPages);

@@ -1,10 +1,6 @@
 import { useEffect, useState } from "react";
 import { getAllCategoriesAPI } from "@/Services/CategoryService";
-import {
-  createProductAPI,
-  updateProductAPI,
-  updateImageAPI,
-} from "@/Services/ProductService";
+import config from "@/Services";
 import { toast } from "react-toastify";
 import type {
   ProductCreateRequest,
@@ -83,7 +79,7 @@ const ProductFormModal = ({ isOpen, onClose, onSaved, product }: Props) => {
     try {
       if (isEdit && product) {
         // Update content
-        await updateProductAPI(
+        await config.updateProductAPI(
           {
             id: product.id,
             name: form.name,
@@ -95,7 +91,7 @@ const ProductFormModal = ({ isOpen, onClose, onSaved, product }: Props) => {
         );
         // Update image nếu có file mới
         if (file) {
-          await updateImageAPI({ productId: product.id }, token || "", [file]);
+          await config.updateImageAPI({ productId: product.id }, token || "", [file]);
         }
         toast.success("Cập nhật sản phẩm thành công!");
         onSaved({
@@ -113,7 +109,7 @@ const ProductFormModal = ({ isOpen, onClose, onSaved, product }: Props) => {
         });
       } else {
         // Add mới
-        const res = await createProductAPI(
+        const res = await config.createProductAPI(
           form,
           token || "",
           file ? [file] : undefined,

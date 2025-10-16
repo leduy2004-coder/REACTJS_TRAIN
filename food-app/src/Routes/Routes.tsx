@@ -4,11 +4,11 @@ import HomePage from "@/Pages/HomePage";
 import ProfilePage from "@/Pages/ProfilePage";
 import SearchPage from "@/Pages/SearchPage";
 
-import ProtectedRoute from "./ProtectedRoute";
 import LoginPage from "@/Pages/LoginPage";
 import RegisterPage from "@/Pages/RegisterPage";
 import ProductDetailPage from "@/Pages/ProductDetailPage";
 import config from "@/Config";
+import { RoleBasedGuard, AuthGuard } from "./Guards";
 
 export const router = createBrowserRouter([
   {
@@ -21,25 +21,35 @@ export const router = createBrowserRouter([
       {
         path: config.routes.profile,
         element: (
-          <ProtectedRoute>
+          <AuthGuard>
             <ProfilePage />
-          </ProtectedRoute>
+          </AuthGuard>
         ),
       },
       {
         path: config.routes.search,
         element: (
-          <ProtectedRoute>
+          <AuthGuard>
             <SearchPage />
-          </ProtectedRoute>
+          </AuthGuard>
         ),
       },
       {
         path: config.routes.product,
         element: (
-          <ProtectedRoute>
+          <AuthGuard>
             <ProductDetailPage />
-          </ProtectedRoute>
+          </AuthGuard>
+        ),
+      },
+      {
+        path: config.routes.admin_category,
+        element: (
+          <AuthGuard>
+            <RoleBasedGuard allowedRoles={["ADMIN"]}>
+              <ProductDetailPage />
+            </RoleBasedGuard>
+          </AuthGuard>
         ),
       },
     ],

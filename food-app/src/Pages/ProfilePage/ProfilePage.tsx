@@ -5,7 +5,7 @@ import { UseProducts } from "@/Context/ProductContext";
 import { ProductFormModal, ProductCard } from "@/Components/Product";
 import type { Product } from "@/Models/Product";
 import { toast } from "react-toastify";
-import { deleteProductAPI } from "@/Services/ProductService";
+import config from "@/Services";
 import { Pagination } from "@/Pagination";
 
 const ProfilePage = () => {
@@ -35,7 +35,7 @@ const ProfilePage = () => {
 
   const handleDelete = async (id: string) => {
     try {
-      const response = await deleteProductAPI(id, token || "");
+      const response = await config.deleteProductAPI(id, token || "");
       if (response) {
         toast.success("Xóa sản phẩm thành công!");
         refreshProducts();

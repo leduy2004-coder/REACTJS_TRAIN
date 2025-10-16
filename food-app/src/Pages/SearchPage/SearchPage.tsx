@@ -1,9 +1,6 @@
 import { useState, useEffect, type SyntheticEvent } from "react";
 import { useNavigate, useSearchParams } from "react-router-dom";
-import {
-  getAllProduct,
-  getAllProductByCategory,
-} from "@/Services/ProductService";
+import config from "@/Services";
 import { getAllCategoriesAPI } from "@/Services/CategoryService";
 import type { ProductGetResponse } from "@/Models/Product";
 import type { CategoriesResponse } from "@/Models/Category";
@@ -58,9 +55,14 @@ const SearchPage = () => {
     try {
       let response;
       if (categoryId) {
-        response = await getAllProductByCategory(1, 9999, categoryId, token!);
+        response = await config.getAllProductByCategory(
+          1,
+          9999,
+          categoryId,
+          token!,
+        );
       } else {
-        response = await getAllProduct(1, 9999, token!);
+        response = await config.getAllProduct(1, 9999, token!);
       }
 
       if (response.code === 1000) {
