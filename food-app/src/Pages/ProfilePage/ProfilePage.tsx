@@ -1,9 +1,8 @@
 import { useEffect, useState } from "react";
-import ProductCard from "@/Components/Product/ProductCard";
-import ProfileInfo from "@/Components/Profile/ProfileInfo";
+import { ProfileInfo } from "@/Components/Profile";
 import { UserAuth } from "@/Context/UserContext";
 import { UseProducts } from "@/Context/ProductContext";
-import ProductFormModal from "@/Components/Product/ProductFormModal";
+import { ProductFormModal, ProductCard } from "@/Components/Product";
 import type { Product } from "@/Models/Product";
 import { toast } from "react-toastify";
 import { deleteProductAPI } from "@/Services/ProductService";
