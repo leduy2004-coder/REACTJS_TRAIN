@@ -27,9 +27,7 @@ const SearchProductCard = ({ product, onViewDetails }: SearchProductCardProps) =
         <h3 className="font-semibold text-gray-800 line-clamp-2">
           {product.name}
         </h3>
-        <p className="text-sm text-gray-600 line-clamp-2">
-          {product.description}
-        </p>
+
       </div>
       <div className="mb-3 flex items-center justify-between">
         <span className="text-lg font-bold text-red-600">

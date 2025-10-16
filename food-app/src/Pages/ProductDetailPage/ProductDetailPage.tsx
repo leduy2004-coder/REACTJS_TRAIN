@@ -25,14 +25,14 @@ const ProductDetailPage = () => {
             <div className="rounded-lg bg-white p-4 shadow">
               <div className="aspect-square w-full overflow-hidden rounded-lg bg-gray-100">
                 <Image
-                  src={product.images?.[0]?.url || images.noImage}
+                  src={product.imgUrl?.[0]?.url || images.noImage}
                   alt={product.name}
                   className="h-full w-full object-cover"
                 />
               </div>
-              {product.images?.length > 1 && (
+              {product.imgUrl?.length > 1 && (
                 <div className="mt-4 grid grid-cols-5 gap-2">
-                  {product.images.slice(1, 6).map((img) => (
+                  {product.imgUrl.slice(1, 6).map((img) => (
                     <div key={img.id} className="aspect-square overflow-hidden rounded-md bg-gray-100">
                       <Image src={img.url} alt={product.name} className="h-full w-full object-cover" />
                     </div>
