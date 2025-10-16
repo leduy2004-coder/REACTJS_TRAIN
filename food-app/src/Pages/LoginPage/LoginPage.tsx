@@ -5,6 +5,7 @@ import { useForm } from "react-hook-form";
 import { toast } from "react-toastify";
 import { loginAPI } from "@/Services/AuthService";
 import { useNavigate, Link } from "react-router-dom"; 
+import config from "@/Config";
 
 type LoginFormsInputs = {
   userName: string;
@@ -115,7 +116,7 @@ const LoginPage = () => {
               <p className="text-sm font-light text-gray-500 dark:text-gray-400">
                 Bạn có tài khoản?{" "}
                 <Link
-                  to="/register"
+                  to={config.routes.register}
                   className="text-primary-600 dark:text-primary-500 font-medium hover:underline"
                 >
                   Đăng ký

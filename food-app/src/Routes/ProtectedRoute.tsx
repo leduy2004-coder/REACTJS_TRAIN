@@ -1,7 +1,7 @@
 import React from "react";
 import { Navigate, useLocation } from "react-router-dom";
 import { UserAuth } from "@/Context/UserContext";
-
+import config from "@/Config";
 type Props = { children: React.ReactNode };
 
 const ProtectedRoute = ({ children }: Props) => {
@@ -10,7 +10,7 @@ const ProtectedRoute = ({ children }: Props) => {
   return isLoggedIn() ? (
     <>{children}</>
   ) : (
-    <Navigate to="/login" state={{ from: location }} replace />
+    <Navigate to={config.routes.login} state={{ from: location }} replace />
   );
 };
 

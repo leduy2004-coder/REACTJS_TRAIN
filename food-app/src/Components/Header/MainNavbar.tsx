@@ -2,6 +2,7 @@ import { useState, type ChangeEvent, type SyntheticEvent } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import images from "@/assets/images";
 import Image from "@/Components/Image";
+import config from "@/Config";
 const MainNavbar = () => {
   const [search, setSearch] = useState<string>("");
   const navigate = useNavigate();
@@ -13,7 +14,7 @@ const MainNavbar = () => {
   const handleSearchSubmit = (e: SyntheticEvent) => {
     e.preventDefault();
     if (search.trim()) {
-      navigate(`/search?q=${encodeURIComponent(search.trim())}`);
+      navigate(`${config.routes.search}?q=${encodeURIComponent(search.trim())}`);
     }
   };
 

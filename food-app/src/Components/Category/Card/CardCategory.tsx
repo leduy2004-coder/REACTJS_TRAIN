@@ -1,12 +1,12 @@
 import type { CategoriesResponse } from "@/Models/Category";
 import Image from "@/Components/Image";
 import { useNavigate } from "react-router-dom";
-
+import config from "@/Config";
 const CardCategory = ({ item }: { item: CategoriesResponse }) => {
   const navigate = useNavigate();
 
   const handleDetail = () => {
-    navigate(`/search?categoryId=${item.id}`);
+    navigate(`${config.routes.search}?categoryId=${item.id}`);
   }
     return (
         <div

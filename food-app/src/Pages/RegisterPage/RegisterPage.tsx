@@ -4,6 +4,7 @@ import { useForm } from "react-hook-form";
 import { toast } from "react-toastify";
 import { registerAPI } from "@/Services/AuthService";
 import { Link, useNavigate } from "react-router-dom";
+import config from "@/Config";
 
 type RegisterFormsInputs = {
   email: string;
@@ -36,7 +37,7 @@ const RegisterPage = () => {
       );
 
       toast.success("Register Success!");
-      navigate("/login");
+      navigate(config.routes.login);
     } catch {
       toast.warning("Server error occurred");
     }
@@ -151,7 +152,7 @@ const RegisterPage = () => {
               <p className="text-sm font-light text-gray-500 dark:text-gray-400">
                 Bạn có tài khoản?{" "}
                 <Link
-                  to="/login"
+                  to={config.routes.login}
                   className="text-primary-600 dark:text-primary-500 font-medium hover:underline"
                 >
                   Đăng nhập

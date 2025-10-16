@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import { UserAuth } from "@/Context/UserContext";
 import { Link } from "react-router-dom";
-
+import config from "@/Config";
 const TopHeader = () => {
   const [showUserMenu, setShowUserMenu] = useState(false);
   const menuRef = useRef<HTMLDivElement>(null);
@@ -71,7 +71,7 @@ const TopHeader = () => {
               {isLoggedIn() ? (
                 <>
                   <Link
-                    to="/profile"
+                    to={config.routes.profile}
                     className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
                   >
                     Trang cá nhân
@@ -86,14 +86,14 @@ const TopHeader = () => {
               ) : (
                 <>
                   <Link
-                    to="/login"
+                    to={config.routes.login}
                     className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
                   >
                     Đăng nhập
                   </Link>
 
                   <Link
-                    to="/register"
+                    to={config.routes.register}
                     className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
                   >
                     Đăng ký

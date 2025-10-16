@@ -8,6 +8,7 @@ import ProtectedRoute from "./ProtectedRoute";
 import LoginPage from "@/Pages/LoginPage";
 import RegisterPage from "@/Pages/RegisterPage";
 import ProductDetailPage from "@/Pages/ProductDetailPage";
+import config from "@/Config";
 
 export const router = createBrowserRouter([
   {
@@ -15,10 +16,10 @@ export const router = createBrowserRouter([
     element: <App />,
     children: [
       { index: true, element: <HomePage /> },
-      { path: "login", element: <LoginPage /> },
-      { path: "register", element: <RegisterPage /> },
+      { path: config.routes.login, element: <LoginPage /> },
+      { path: config.routes.register, element: <RegisterPage /> },
       {
-        path: "profile",
+        path: config.routes.profile,
         element: (
           <ProtectedRoute>
             <ProfilePage />
@@ -26,7 +27,7 @@ export const router = createBrowserRouter([
         ),
       },
       {
-        path: "search",
+        path: config.routes.search,
         element: (
           <ProtectedRoute>
             <SearchPage />
@@ -34,7 +35,7 @@ export const router = createBrowserRouter([
         ),
       },
       {
-        path: "product/:id",
+        path: config.routes.product,
         element: (
           <ProtectedRoute>
             <ProductDetailPage />
