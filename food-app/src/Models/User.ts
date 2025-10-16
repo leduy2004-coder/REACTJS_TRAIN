@@ -18,3 +18,8 @@ export type RoleResponse = {
   code: string;
   name: string;
 };
+
+export type RoleRequest = {
+  code: string;
+  name: string;
+};

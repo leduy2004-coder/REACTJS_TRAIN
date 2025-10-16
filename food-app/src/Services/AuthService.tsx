@@ -1,7 +1,7 @@
 import * as callPath from "@/Utils/httpRequest";
 
 import type { ApiResponse } from "@/Models/Response";
-import type { UserProfileToken } from "@/Models/User";
+import type { RoleRequest, UserProfileToken } from "@/Models/User";
 
 /**
  * Login user and get token
@@ -25,12 +25,14 @@ export const registerAPI = async (
   email: string,
   username: string,
   password: string,
-  nickname: string,
+  nickName: string,
+  status: true,
+  roles: RoleRequest[] = [{ code: "USER", name: "User" }],
 ): Promise<ApiResponse<void>> => {
   const res = await callPath.post<ApiResponse<void>>(
     "auth/users/register",
-    { email, username, password, nickname },
-    "", 
+    { email, username, password, nickName, status, roles },
+    "",
   );
   return res.data;
 };
@@ -45,4 +47,4 @@ export const logoutAPI = async (token: string): Promise<ApiResponse<void>> => {
     token,
   );
   return res.data;
-}
+};

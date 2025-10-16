@@ -34,12 +34,14 @@ const RegisterPage = () => {
         form.userName,
         form.password,
         form.nickName || "",
+        true,
+        [{ code: "USER", name: "User" }],
       );
 
-      toast.success("Register Success!");
+      toast.success("Đăng ký thành công!");
       navigate(config.routes.login);
     } catch {
-      toast.warning("Server error occurred");
+      toast.warning("Đăng ký thất bại!");
     }
   };
 

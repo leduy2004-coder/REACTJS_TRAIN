@@ -40,11 +40,11 @@ const LoginPage = () => {
         localStorage.setItem("user", JSON.stringify(userObj));
         setToken(res.result.access_token);
         setUser(userObj);
-        toast.success("Login Success!");
+        toast.success("Đăng nhập thành công!");
         navigate("/");
       }
     } catch {
-      toast.warning("Server error occurred");
+      toast.warning("Đăng nhập thất bại" );
     }
   };
 
