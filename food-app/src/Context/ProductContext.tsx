@@ -10,9 +10,6 @@ type ProductContextType = {
   isLoading: boolean;
   setPage: React.Dispatch<React.SetStateAction<number>>;
   refreshProducts: (page?: number) => Promise<void>;
-  addProduct: (p: Product) => void;
-  updateProduct: (p: Product) => void;
-  removeProduct: (id: string) => void;
   isAddOpen: boolean;
   setIsAddOpen: React.Dispatch<React.SetStateAction<boolean>>;
 };
@@ -40,10 +37,11 @@ export const ProductProvider = ({
   const refreshProducts = async (pageNum = 1) => {
     try {
       setIsLoading(true);
-      const res = await getMyProductsAPI(pageNum, 10, token || "");
+      const res = await getMyProductsAPI(pageNum, 2, token || "");
       const data = res.result;
       setProducts(data.data);
       setTotalPages(data.totalPages);
+      setPage(pageNum);
     } catch (err) {
       console.error(err);
       toast.error("Không thể tải danh sách sản phẩm.");
@@ -52,12 +50,6 @@ export const ProductProvider = ({
     }
   };
 
-  const addProduct = (p: Product) => setProducts((prev) => [...prev, p]);
-  const updateProduct = (p: Product) =>
-    setProducts((prev) => prev.map((item) => (item.id === p.id ? p : item)));
-  const removeProduct = (id: string) =>
-    setProducts((prev) => prev.filter((item) => item.id !== id));
-
   const value = {
     products,
     page,
@@ -65,9 +57,6 @@ export const ProductProvider = ({
     isLoading,
     setPage,
     refreshProducts,
-    addProduct,
-    updateProduct,
-    removeProduct,
     isAddOpen,
     setIsAddOpen,
   };

@@ -8,7 +8,7 @@ const httpRequest = axios.create({
 });
 
 /**
- * ✅ Hàm tiện ích tạo headers chỉ khi có token
+ * Hàm tiện ích tạo headers chỉ khi có token
  */
 const buildHeaders = (tokenStr: string, options: AxiosRequestConfig = {}) => {
   const headers: Record<string, string> = { ...(options.headers as Record<string, string> ?? {}) };

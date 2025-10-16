@@ -3,6 +3,7 @@ import type { UserProfile } from "@/Models/User";
 import { useNavigate } from "react-router-dom";
 import React from "react";
 import axios from "axios";
+import { logoutAPI } from "@/Services/AuthService";
 
 type UserContextType = {
   user: UserProfile | null;
@@ -44,6 +45,7 @@ export const UserProvider = ({ children }: Props) => {
   };
 
   const logout = () => {
+    logoutAPI(token || "");
     localStorage.removeItem("token");
     localStorage.removeItem("user");
     setUser(null);

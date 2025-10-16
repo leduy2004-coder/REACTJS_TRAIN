@@ -6,16 +6,26 @@ import { ProductFormModal, ProductCard } from "@/Components/Product";
 import type { Product } from "@/Models/Product";
 import { toast } from "react-toastify";
 import { deleteProductAPI } from "@/Services/ProductService";
+import { Pagination } from "@/Pagination";
 
 const ProfilePage = () => {
   const { user, token } = UserAuth();
-  const { products, isAddOpen, setIsAddOpen, refreshProducts, isLoading } =
-    UseProducts();
+  const {
+    products,
+    isAddOpen,
+    setIsAddOpen,
+    refreshProducts,
+    isLoading,
+    page,
+    totalPages,
+    setPage,
+  } = UseProducts();
   const [formProduct, setFormProduct] = useState<Product | null>(null);
 
   useEffect(() => {
-    refreshProducts();
-  }, []);
+    refreshProducts(page);
+  }, [page]);
+
   const handleEdit = (id: string) => {
     const productToEdit = products.find((p) => p.id === id);
     if (productToEdit) {
@@ -58,16 +68,27 @@ const ProfilePage = () => {
         {isLoading ? (
           <p className="text-center text-gray-500">Đang tải sản phẩm...</p>
         ) : (
-          <div className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3">
-            {products.map((product) => (
-              <ProductCard
-                key={product.id}
-                product={product}
-                onEdit={handleEdit}
-                onDelete={handleDelete}
-              />
-            ))}
-          </div>
+          <>
+            <div className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3">
+              {products.map((product) => (
+                <ProductCard
+                  key={product.id}
+                  product={product}
+                  onEdit={handleEdit}
+                  onDelete={handleDelete}
+                />
+              ))}
+            </div>
+
+            <Pagination
+              page={page}
+              totalPages={totalPages}
+              onPageChange={(newPage) => {
+                setPage(newPage);
+                refreshProducts(newPage);
+              }}
+            />
+          </>
         )}
       </section>
 

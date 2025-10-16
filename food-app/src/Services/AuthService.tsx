@@ -34,3 +34,15 @@ export const registerAPI = async (
   );
   return res.data;
 };
+
+/**
+ * logout user
+ */
+export const logoutAPI = async (token: string): Promise<ApiResponse<void>> => {
+  const res = await callPath.post<ApiResponse<void>>(
+    "auth/auth/logout",
+    {},
+    token,
+  );
+  return res.data;
+}

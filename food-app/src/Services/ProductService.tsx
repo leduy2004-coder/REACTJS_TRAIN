@@ -79,7 +79,6 @@ export const createProductAPI = async (
     tokenStr,
     { headers: { "Content-Type": "multipart/form-data" } },
   );
-  console.log("res", res);
   return res.data;
 };
 
