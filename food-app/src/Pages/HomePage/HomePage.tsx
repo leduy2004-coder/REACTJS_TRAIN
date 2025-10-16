@@ -1,7 +1,11 @@
 import Category from "@/Components/Category";
 import { Hero } from "@/Components/Hero";
-
+import { UserAuth } from "@/Context/UserContext";
+import { Link } from "react-router-dom";
+import config from "@/Config";
 const HomePage = () => {
+  const { user } = UserAuth();
+  console.log("User in HomePage:", user);
   return (
     <div className="min-h-screen bg-gray-50">
       {/* Hero Banner */}
@@ -11,8 +15,15 @@ const HomePage = () => {
       {/* Featured Categories */}
       <section className="container mx-auto px-6 py-12">
         <h2 className="mb-6 text-2xl font-bold text-gray-800">Loại</h2>
+        <div className="mb-4 text-gray-600">
+          {user?.role === "ADMIN" && (
+            <button className="mt-6 rounded-lg bg-red-600 px-4 py-2 text-sm font-semibold text-white shadow transition-colors hover:bg-red-700">
+              <Link to={config.routes.admin_category}>Quản lý loại</Link>
+            </button>
+          )}
+        </div>
+
         <Category />
-        
       </section>
 
       {/* Promotions */}

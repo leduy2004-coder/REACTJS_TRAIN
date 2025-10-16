@@ -9,6 +9,7 @@ import RegisterPage from "@/Pages/RegisterPage";
 import ProductDetailPage from "@/Pages/ProductDetailPage";
 import config from "@/Config";
 import { RoleBasedGuard, AuthGuard } from "./Guards";
+import { AdminCategory } from "@/Pages/Admin_Category";
 
 export const router = createBrowserRouter([
   {
@@ -47,7 +48,7 @@ export const router = createBrowserRouter([
         element: (
           <AuthGuard>
             <RoleBasedGuard allowedRoles={["ADMIN"]}>
-              <ProductDetailPage />
+              <AdminCategory />
             </RoleBasedGuard>
           </AuthGuard>
         ),

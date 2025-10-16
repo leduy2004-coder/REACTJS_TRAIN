@@ -35,7 +35,7 @@ const LoginPage = () => {
         const userObj = {
           nickName: res.result.nickName,
           email: res.result.email,
-          roles: res.result.roles[0].code,
+          role: res.result.roles[0].code,
         };
         localStorage.setItem("user", JSON.stringify(userObj));
         setToken(res.result.access_token);
