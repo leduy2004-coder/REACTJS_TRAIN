@@ -14,7 +14,7 @@ const ProductCard = ({ product, onEdit, onDelete }: Props) => {
       <Image
         src={product?.imgUrl?.[0]?.url}
         alt={product.name}
-        className="mb-3 h-40 w-full rounded-md object-cover"
+          className="mb-3 h-40 w-full rounded-md"
       />
       <div className="mb-2 font-semibold text-gray-800">{product.name}</div>
    

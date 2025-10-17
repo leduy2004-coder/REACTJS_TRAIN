@@ -28,9 +28,16 @@ export type ProductGetResponse = {
   name: string;
   price: number;
   description: string;
-  categoryName: string;
   categoryId: string;
   imgUrl: CloudinaryResponse[];
+
+  user: ProfileGetResponse;
+};
+
+export type ProfileGetResponse = {
+  email: string;
+  nickName: string;
+  id: string;
 };
 
 export type ProductUpdateRequest = {

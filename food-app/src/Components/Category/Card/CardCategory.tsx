@@ -14,11 +14,11 @@ const CardCategory = ({ item }: { item: CategoriesResponse }) => {
       key={item.id}
       className="group rounded-xl border border-gray-200 bg-white p-6 shadow-sm transition hover:-translate-y-1 hover:shadow-md"
     >
-      <div className="mb-3 h-28 w-full rounded-lg bg-gradient-to-br from-gray-100 to-gray-200">
+      <div className="mb-3 h-40 w-full rounded-lg bg-gradient-to-br from-gray-100 to-gray-200">
         <Image
           src={item?.img?.url}
           alt={item.name}
-          className="h-full w-full rounded-lg object-cover"
+          className="h-full w-full rounded-lg"
         />
       </div>
       <div className="flex items-center justify-between">
