@@ -16,11 +16,9 @@ import type {
 export const getMyProductsAPI = async (
   page = 1,
   size = 10,
-  tokenStr: string,
 ): Promise<ApiResponse<PageResponse<ProductGetResponse>>> => {
   const res = await callPath.get<ApiResponse<PageResponse<ProductGetResponse>>>(
     "product/get-my-products",
-    tokenStr,
     { params: { page, size } },
   );
   return res;
@@ -33,11 +31,9 @@ export const getAllProductByCategory = async (
   page = 1,
   size = 10,
   categoryId: string,
-  tokenStr: string,
 ): Promise<ApiResponse<PageResponse<ProductGetResponse>>> => {
   const res = await callPath.get<ApiResponse<PageResponse<ProductGetResponse>>>(
     `product/get-products-by-category/${categoryId}`,
-    tokenStr,
     { params: { page, size } },
   );
   return res;
@@ -49,11 +45,9 @@ export const getAllProductByCategory = async (
 export const getAllProduct = async (
   page = 1,
   size = 10,
-  tokenStr: string,
 ): Promise<ApiResponse<PageResponse<ProductGetResponse>>> => {
   const res = await callPath.get<ApiResponse<PageResponse<ProductGetResponse>>>(
     `product/get-all-products`,
-    tokenStr,
     { params: { page, size } },
   );
   return res;
@@ -63,7 +57,6 @@ export const getAllProduct = async (
  */
 export const createProductAPI = async (
   request: ProductCreateRequest,
-  tokenStr: string,
   files?: File[],
 ): Promise<ApiResponse<ProductCreateResponse>> => {
   const formData = new FormData();
@@ -76,7 +69,6 @@ export const createProductAPI = async (
   const res = await callPath.post<ApiResponse<ProductCreateResponse>>(
     "product/create",
     formData,
-    tokenStr,
     { headers: { "Content-Type": "multipart/form-data" } },
   );
   return res.data;
@@ -87,11 +79,9 @@ export const createProductAPI = async (
  */
 export const deleteProductAPI = async (
   productId: string,
-  tokenStr: string,
 ): Promise<ApiResponse<boolean>> => {
   const res = await callPath.deleted<ApiResponse<boolean>>(
     "product/delete",
-    tokenStr,
     { params: { productId } },
   );
   return res.data;
@@ -102,12 +92,10 @@ export const deleteProductAPI = async (
  */
 export const updateProductAPI = async (
   request: ProductUpdateRequest,
-  tokenStr: string,
 ): Promise<ApiResponse<ProductGetResponse>> => {
   const res = await callPath.patch<ApiResponse<ProductGetResponse>>(
     "product/update/content",
     request,
-    tokenStr,
   );
   return res.data;
 };
@@ -116,7 +104,6 @@ export const updateProductAPI = async (
  */
 export const updateImageAPI = async (
   request: ProductUpdateImageRequest,
-  tokenStr: string,
   files?: File[],
 ): Promise<ApiResponse<CloudinaryResponse[]>> => {
   const formData = new FormData();
@@ -129,7 +116,6 @@ export const updateImageAPI = async (
   const res = await callPath.post<ApiResponse<CloudinaryResponse[]>>(
     "product/update/image",
     formData,
-    tokenStr,
     { headers: { "Content-Type": "multipart/form-data" } },
   );
   return res.data;

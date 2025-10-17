@@ -9,7 +9,7 @@ import config from "@/Services";
 import { Pagination } from "@/Pagination";
 
 const ProfilePage = () => {
-  const { user, token } = UserAuth();
+  const { user } = UserAuth();
   const {
     products,
     isAddOpen,
@@ -35,7 +35,7 @@ const ProfilePage = () => {
 
   const handleDelete = async (id: string) => {
     try {
-      const response = await config.deleteProductAPI(id, token || "");
+      const response = await config.deleteProductAPI(id);
       if (response) {
         toast.success("Xóa sản phẩm thành công!");
         refreshProducts();

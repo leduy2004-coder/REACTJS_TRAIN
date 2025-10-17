@@ -5,11 +5,9 @@ import { getAllCategoriesAPI } from "@/Services/CategoryService";
 import type { ProductGetResponse } from "@/Models/Product";
 import type { CategoriesResponse } from "@/Models/Category";
 import { SearchForm, SearchResults } from "@/Components/Search";
-import { UserAuth } from "@/Context/UserContext";
 
 const SearchPage = () => {
   const navigate = useNavigate();
-  const { token } = UserAuth();
   const [searchParams, setSearchParams] = useSearchParams();
 
   const [searchQuery, setSearchQuery] = useState("");
@@ -59,10 +57,9 @@ const SearchPage = () => {
           1,
           9999,
           categoryId,
-          token!,
         );
       } else {
-        response = await config.getAllProduct(1, 9999, token!);
+        response = await config.getAllProduct(1, 9999);
       }
 
       if (response.code === 1000) {

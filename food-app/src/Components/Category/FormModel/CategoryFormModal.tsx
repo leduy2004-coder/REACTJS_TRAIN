@@ -5,7 +5,6 @@ import type {
   CategoriesResponse,
 } from "@/Models/Category";
 import { toast } from "react-toastify";
-import { UserAuth } from "@/Context/UserContext";
 interface AdminCategoryFormModalProps {
   isOpen: boolean;
   onClose: () => void;
@@ -20,7 +19,6 @@ const CategoryFormModal = ({
   const [name, setName] = useState("");
   const [file, setFile] = useState<File | null>(null);
   const [loading, setLoading] = useState(false);
-  const { token } = UserAuth();
 
   if (!isOpen) return null;
 
@@ -35,11 +33,7 @@ const CategoryFormModal = ({
     setLoading(true);
 
     try {
-      const response = await createCategoryAPI(
-        request,
-        token || "",
-        file || undefined,
-      );
+      const response = await createCategoryAPI(request, file || undefined);
       if (response.code === 1000) {
         toast.success("Tạo danh mục thành công!");
         onSaved(response.result);

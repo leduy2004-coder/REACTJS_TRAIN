@@ -13,7 +13,7 @@ export const loginAPI = async (
   const res = await callPath.post<ApiResponse<UserProfileToken>>(
     "auth/auth2/authenticate",
     { username, password },
-    "",
+    { skipAuth: true }
   );
   return res.data;
 };
@@ -32,7 +32,7 @@ export const registerAPI = async (
   const res = await callPath.post<ApiResponse<void>>(
     "auth/users/register",
     { email, username, password, nickName, status, roles },
-    "",
+    { skipAuth: true }
   );
   return res.data;
 };
@@ -40,11 +40,11 @@ export const registerAPI = async (
 /**
  * logout user
  */
-export const logoutAPI = async (token: string): Promise<ApiResponse<void>> => {
+export const logoutAPI = async (): Promise<ApiResponse<void>> => {
   const res = await callPath.post<ApiResponse<void>>(
     "auth/auth/logout",
     {},
-    token,
   );
   return res.data;
 };
+

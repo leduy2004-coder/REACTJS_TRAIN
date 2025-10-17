@@ -45,9 +45,8 @@ export const UserProvider = ({ children }: Props) => {
   };
 
   const logout = () => {
-    logoutAPI(token || "");
-    localStorage.removeItem("token");
-    localStorage.removeItem("user");
+    logoutAPI();
+    localStorage.clear();
     setUser(null);
     setToken("");
     navigate("/");

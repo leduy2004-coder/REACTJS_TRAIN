@@ -10,7 +10,6 @@ import type {
  */
 export const createCategoryAPI = async (
   request: CategoryCreateRequest,
-  tokenStr: string,
   file?: File,
 ): Promise<ApiResponse<CategoriesResponse>> => {
   const formData = new FormData();
@@ -23,7 +22,6 @@ export const createCategoryAPI = async (
   const res = await callPath.post<ApiResponse<CategoriesResponse>>(
     "product/categories/create",
     formData,
-    tokenStr,
     { headers: { "Content-Type": "multipart/form-data" } },
   );
   return res.data;
@@ -37,9 +35,7 @@ export const getAllCategoriesAPI = async (): Promise<
 > => {
   const res = await callPath.get<ApiResponse<CategoriesResponse[]>>(
     "product/categories/get-all",
-    "",
-    {}, 
+    { skipAuth: true },
   );
   return res;
 };
-

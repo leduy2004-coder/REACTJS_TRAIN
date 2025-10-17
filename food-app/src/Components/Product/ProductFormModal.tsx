@@ -9,7 +9,6 @@ import type {
   Product,
 } from "@/Models/Product";
 import type { CategoriesResponse } from "@/Models/Category";
-import { UserAuth } from "@/Context/UserContext";
 type Props = {
   isOpen: boolean;
   onClose: () => void;
@@ -18,7 +17,6 @@ type Props = {
 };
 
 const ProductFormModal = ({ isOpen, onClose, onSaved, product }: Props) => {
-  const { token } = UserAuth();
   const isEdit = !!product?.id;
   const [form, setForm] = useState<ProductCreateRequest>({
     name: product?.name || "",
@@ -79,19 +77,16 @@ const ProductFormModal = ({ isOpen, onClose, onSaved, product }: Props) => {
     try {
       if (isEdit && product) {
         // Update content
-        await config.updateProductAPI(
-          {
-            id: product.id,
-            name: form.name,
-            description: form.description,
-            price: form.price,
-            categoryId: form.categoryId,
-          } as ProductUpdateRequest,
-          token || "",
-        );
+        await config.updateProductAPI({
+          id: product.id,
+          name: form.name,
+          description: form.description,
+          price: form.price,
+          categoryId: form.categoryId,
+        } as ProductUpdateRequest);
         // Update image nếu có file mới
         if (file) {
-          await config.updateImageAPI({ productId: product.id }, token || "", [file]);
+          await config.updateImageAPI({ productId: product.id }, [file]);
         }
         toast.success("Cập nhật sản phẩm thành công!");
         onSaved({
@@ -111,7 +106,6 @@ const ProductFormModal = ({ isOpen, onClose, onSaved, product }: Props) => {
         // Add mới
         const res = await config.createProductAPI(
           form,
-          token || "",
           file ? [file] : undefined,
         );
         toast.success("Thêm sản phẩm thành công!");
