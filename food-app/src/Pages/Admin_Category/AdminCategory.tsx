@@ -46,9 +46,7 @@ const AdminCategory = () => {
           </button>
         </div>
 
-        {/* Nội dung */}
         <div className="rounded-2xl border border-amber-100 bg-white p-6 shadow-xl">
-          {/* Loading */}
           {loading && (
             <div className="flex justify-center py-10">
               <div className="h-10 w-10 animate-spin rounded-full border-4 border-amber-500 border-t-transparent"></div>
@@ -69,7 +67,6 @@ const AdminCategory = () => {
             </div>
           )}
 
-          {/* Danh sách */}
           {!loading && !error && categories.length > 0 && (
             <div className="grid gap-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
               {categories.map((item) => (

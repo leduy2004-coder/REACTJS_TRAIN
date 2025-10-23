@@ -35,7 +35,7 @@ export const ProductProvider = ({
   const refreshProducts = async (pageNum = 1) => {
     try {
       setIsLoading(true);
-      const res = await config.getMyProductsAPI(pageNum, 2);
+      const res = await config.getMyProductsAPI(pageNum, 5);
       const data = res.result;
       setProducts(data.data);
       setTotalPages(data.totalPages);

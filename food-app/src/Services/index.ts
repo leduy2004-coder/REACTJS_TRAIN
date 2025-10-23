@@ -9,6 +9,7 @@ import {
   updateImageAPI,
   updateProductAPI,
 } from "./ProductService";
+import { createCommentAPI, getCommentByProductIdAPI, deleteCommentAPI } from "./CommentService";
 const config = {
   loginAPI,
   registerAPI,
@@ -22,6 +23,9 @@ const config = {
   deleteProductAPI,
   updateImageAPI,
   updateProductAPI,
+  createCommentAPI,
+  getCommentByProductIdAPI,
+  deleteCommentAPI,
 };
 
 export default config;

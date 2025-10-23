@@ -2,7 +2,6 @@ import { createContext, useEffect, useState, useContext } from "react";
 import type { UserProfile } from "@/Models/User";
 import { useNavigate } from "react-router-dom";
 import React from "react";
-import axios from "axios";
 import { logoutAPI } from "@/Services/AuthService";
 
 type UserContextType = {
@@ -29,16 +28,13 @@ export const UserProvider = ({ children }: Props) => {
 
   useEffect(() => {
     const user = localStorage.getItem("user");
-    const token = localStorage.getItem("token") ;
+    const token = localStorage.getItem("token");
     if (user && token) {
       setUser(JSON.parse(user));
       setToken(token);
-      axios.defaults.headers.common["Authorization"] = "Bearer " + token;
     }
     setIsReady(true);
   }, []);
-
- 
 
   const isLoggedIn = () => {
     return !!user;

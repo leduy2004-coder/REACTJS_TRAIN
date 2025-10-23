@@ -55,11 +55,11 @@ const SearchPage = () => {
       if (categoryId) {
         response = await config.getAllProductByCategory(
           1,
-          9999,
+          10,
           categoryId,
         );
       } else {
-        response = await config.getAllProduct(1, 9999);
+        response = await config.getAllProduct(1, 10);
       }
 
       if (response.code === 1000) {

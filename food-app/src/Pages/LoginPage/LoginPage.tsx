@@ -35,6 +35,7 @@ const LoginPage = () => {
         const userObj = {
           nickName: res.result.nickName,
           email: res.result.email,
+          id: res.result.id,
           role: res.result.roles[0].code,
         };
         localStorage.setItem("user", JSON.stringify(userObj));

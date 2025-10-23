@@ -1,4 +1,5 @@
 export type UserProfileToken = {
+  id: string;
   access_token: string;
   refresh_token: string;
   nickName: string;
@@ -8,6 +9,7 @@ export type UserProfileToken = {
 };
 
 export type UserProfile = {
+  id: string;
   email: string;
   nickName: string;
   role: string;
